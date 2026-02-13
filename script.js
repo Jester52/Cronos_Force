@@ -1,3 +1,10 @@
+// Registrar el Service Worker para que Chrome permita la instalación como App
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
+
 let startTime, elapsedTime = 0, timerInterval;
 let isRunning = false;
 let isForced = false;
@@ -105,4 +112,5 @@ function toggleSettings() {
         forcedCents = forceInput.value.padStart(2, '0').slice(-2);
     }
     settingsMenu.classList.add('hidden');
+
 }

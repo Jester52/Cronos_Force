@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Cronómetro</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Cronómetro">
+    
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="statusIndicator" class="v-line hidden"></div>
+
+    <div id="app">
+        <div id="settings" class="hidden">
+            <h3>Configurar Forzaje</h3>
+            <input type="number" id="forceValue" placeholder="Centésimas (00-99)" pattern="\d*">
+            <button onclick="toggleSettings()">Guardar</button>
+        </div>
+
+        <div class="timer-display" id="display">
+            00:00.<span class="ms">00</span>
+        </div>
+
+        <div class="controls">
+            <button id="lapBtn" class="btn secondary">Vuelta</button>
+            <button id="startBtn" class="btn start">Iniciar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

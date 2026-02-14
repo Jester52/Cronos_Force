@@ -1,4 +1,4 @@
-// Registrar el Service Worker para que Chrome permita la instalación como App
+// Registrar el Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js');
@@ -10,25 +10,23 @@ let isRunning = false;
 let isForced = false;
 let forcedCents = "00"; 
 let displayTapCount = 0; 
-let lapBtnTapCount = 0; 
+let resetBtnTapCount = 0; 
+let lapCount = 0;
 
 const display = document.getElementById('display');
 const startBtn = document.getElementById('startBtn');
 const lapBtn = document.getElementById('lapBtn');
+const resetBtn = document.getElementById('resetBtn');
+const lapsList = document.getElementById('lapsList');
 const forceInput = document.getElementById('forceValue');
 const settingsMenu = document.getElementById('settings');
 const statusIndicator = document.getElementById('statusIndicator');
 
-// Actualiza el indicador visual para el mago
 function updateSecretUI() {
-    if (isForced) {
-        statusIndicator.classList.remove('hidden');
-    } else {
-        statusIndicator.classList.add('hidden');
-    }
+    isForced ? statusIndicator.classList.remove('hidden') : statusIndicator.classList.add('hidden');
 }
 
-// --- LOGICA BOTÓN INICIAR / DETENER ---
+// --- BOTÓN INICIAR / DETENER ---
 startBtn.addEventListener('click', () => {
     if (!isRunning) {
         startTime = Date.now() - elapsedTime;
@@ -36,7 +34,6 @@ startBtn.addEventListener('click', () => {
         isRunning = true;
         startBtn.innerText = "Detener";
         startBtn.className = "btn stop";
-        lapBtn.innerText = "Vuelta"; 
     } else {
         clearInterval(timerInterval);
         isRunning = false;
@@ -47,39 +44,46 @@ startBtn.addEventListener('click', () => {
             isForced = false; 
             updateSecretUI();
         }
-
         startBtn.innerText = "Iniciar";
         startBtn.className = "btn start";
-        lapBtn.innerText = "Reiniciar"; 
     }
 });
 
-// --- LOGICA BOTÓN IZQUIERDO (Doble Toque + Reset) ---
+// --- BOTÓN VUELTA ---
 lapBtn.addEventListener('click', () => {
-    lapBtnTapCount++;
+    if (isRunning) {
+        lapCount++;
+        const li = document.createElement('li');
+        li.className = 'lap-item';
+        li.innerHTML = `<span class="lap-number">Vuelta ${lapCount}</span> <span>${display.innerText}</span>`;
+        lapsList.prepend(li);
+    }
+});
 
-    if (lapBtnTapCount === 1) {
+// --- BOTÓN REINICIAR (Con Doble Toque Secreto) ---
+resetBtn.addEventListener('click', () => {
+    resetBtnTapCount++;
+
+    if (resetBtnTapCount === 1) {
         setTimeout(() => {
-            if (lapBtnTapCount === 1) {
-                // Toque único: Función normal
-                if (!isRunning && lapBtn.innerText === "Reiniciar") {
-                    resetTimer();
-                }
-            } else if (lapBtnTapCount === 2) {
+            if (resetBtnTapCount === 1) {
+                if (!isRunning) resetTimer();
+            } else if (resetBtnTapCount === 2) {
                 // DOBLE TOQUE: Activar/Desactivar Force
                 isForced = !isForced;
                 updateSecretUI();
                 if (navigator.vibrate) navigator.vibrate(60); 
             }
-            lapBtnTapCount = 0; 
+            resetBtnTapCount = 0; 
         }, 300); 
     }
 });
 
 function resetTimer() {
     elapsedTime = 0;
+    lapCount = 0;
     display.innerHTML = `00:00.<span class="ms">00</span>`;
-    lapBtn.innerText = "Vuelta";
+    lapsList.innerHTML = "";
     isForced = false; 
     updateSecretUI();
 }
@@ -112,5 +116,4 @@ function toggleSettings() {
         forcedCents = forceInput.value.padStart(2, '0').slice(-2);
     }
     settingsMenu.classList.add('hidden');
-
 }

@@ -11,7 +11,6 @@ body {
     user-select: none;
 }
 
-/* Línea indicadora secreta */
 .v-line {
     position: absolute;
     top: 10px;
@@ -19,7 +18,7 @@ body {
     transform: translateX(-50%);
     width: 35px;
     height: 3px;
-    background-color: #222; /* Gris muy oscuro, casi invisible */
+    background-color: #222;
     border-radius: 5px;
     z-index: 1000;
 }
@@ -29,31 +28,33 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 40px;
 }
 
 .timer-display {
-    font-size: 85px;
+    font-size: 80px;
     font-weight: 200;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     font-variant-numeric: tabular-nums;
     cursor: pointer;
 }
 
-.ms { font-size: 65px; color: #ccc; }
+.ms { font-size: 60px; color: #ccc; }
 
 .controls {
     display: flex;
-    justify-content: space-around;
-    width: 90%;
-    max-width: 400px;
+    justify-content: center;
+    gap: 15px;
+    width: 95%;
+    max-width: 450px;
 }
 
 .btn {
-    width: 85px;
-    height: 85px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     border: none;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: filter 0.1s;
@@ -65,9 +66,30 @@ body {
 .stop { background-color: #3d1a1a; color: #ff453a; }
 .secondary { background-color: #333; color: #fff; }
 
+/* Lista de Vueltas */
+.laps-container {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 250px;
+    overflow-y: auto;
+    border-top: 0.5px solid #333;
+}
+
+.lap-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 5px;
+    border-bottom: 0.5px solid #333;
+    font-size: 18px;
+}
+
+.lap-number { color: #888; }
+
 .hidden { display: none !important; }
 
-/* Menú oculto */
 #settings {
     position: absolute;
     top: 50%;

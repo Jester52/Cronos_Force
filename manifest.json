@@ -1,16 +1,25 @@
 {
-  "short_name": "Cronómetro",
-  "name": "Cronómetro Pro",
-  "start_url": "index.html",
+  "name": "CronosForcePro",
+  "short_name": "CronosForce",
+  "description": "Herramienta profesional de mentalismo",
+  "id": "/cronometro.html",
+  "start_url": "./cronometro.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

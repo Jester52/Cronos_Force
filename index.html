@@ -3,40 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Cronómetro</title>
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Cronómetro">
-    
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json">
-    
+    <title>CronosForce</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<meta name="theme-color" content="#000000">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
 </head>
 <body>
-    <div id="statusIndicator" class="v-line hidden"></div>
-
-    <div id="app">
-        <div id="settings" class="hidden">
-            <h3>Configurar Forzaje</h3>
-            <input type="number" id="forceValue" placeholder="Forzar" pattern="\d*">
-            <button onclick="toggleSettings()">Guardar</button>
+    <div id="app" class="home-view">
+        <div class="logo"><u>CRONOS FORCE</u></div>
+        <div class="home-container">
+            <a href="cronometro.html" class="home-btn primary">INICIO</a>
+            <a href="config.html" class="home-btn_config">CONFIGURACIÓN</a>
+            <a href="instructions.html" class="home-btn_instruct">INSTRUCCIONES</a>
         </div>
-
-        <div class="timer-display" id="display">
-            00:00.<span class="ms">00</span>
-        </div>
-
-        <div class="controls">
-            <button id="lapBtn" class="btn secondary">Vuelta</button>
-            <button id="resetBtn" class="btn secondary">Reiniciar</button>
-            <button id="startBtn" class="btn start">Iniciar</button>
-        </div>
-
-        <ul id="lapsList" class="laps-container"></ul>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
